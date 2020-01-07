@@ -3,12 +3,12 @@ package com.aaronhowser1.voracious.items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 
-public class mouth extends Item {
+public class MouthItem extends Item {
 
-    public mouth() {
+    public MouthItem() {
         super(new Item.Properties()
         .maxStackSize(1)
         .group(ItemGroup.FOOD));
-        setRegistryName("mouth");
     }
+
 }
