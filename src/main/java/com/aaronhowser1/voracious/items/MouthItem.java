@@ -42,11 +42,11 @@ public class MouthItem extends Item {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
         if (entity instanceof ServerPlayerEntity && stack.hasTag()) {
-            float ehp = ((ServerPlayerEntity) entity).getHealth();
+            float efl = ((ServerPlayerEntity) entity).getFoodStats().getSaturationLevel();
             float hp = stack.getTag().getFloat("stored_hp");
-            float a = Math.max(Math.min(hp, 1F), ((ServerPlayerEntity) entity).getMaxHealth() - ehp);
+            float a = Math.max(Math.min(hp, 1F), (20 - efl));
             stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp - a));
-            ((ServerPlayerEntity) entity).setHealth(ehp + a);
+            ((ServerPlayerEntity) entity).getFoodStats().setFoodSaturationLevel(Math.round(efl + a));
         }
     }
 }
