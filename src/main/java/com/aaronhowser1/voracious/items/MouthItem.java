@@ -3,12 +3,15 @@ package com.aaronhowser1.voracious.items;
 import com.aaronhowser1.voracious.Config;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.FloatNBT;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
@@ -23,20 +26,37 @@ public class MouthItem extends Item {
     //Most of the code below here written by LatvianModder, who refused to teach me how to make this and just made it himself
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity player, LivingEntity target, Hand hand) {
-        if (player.world.isRemote() || target instanceof PlayerEntity) {
-            return true;
+        if (player.world.isRemote()) {
+            return false;
         }
-
         float hp = 0F;
-
         if (stack.hasTag()) {
             hp = stack.getTag().getFloat("stored_hp");
         }
-
-        hp += target.getHealth();
-        stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp));
-        target.remove();
-
+        //      If target is player and eating players is disabled, stop
+        if (target instanceof PlayerEntity && !Config.CAN_EAT_PLAYERS.get()) {
+            return false;
+        }
+        //      If target is boss and eating bosses is disabled, stop
+        if (!target.isNonBoss() && !Config.CAN_EAT_BOSSES.get()) {
+            return false;
+        }
+        //      If mob is NOT monster, run normally
+        if (!(target instanceof IMob)) {
+            hp += target.getHealth();
+            stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp));
+            target.remove();
+        }
+        //      If mob IS monster and eating monsters is ENABLED, run normally
+        if (target instanceof IMob && Config.CAN_EAT_MONSTERS.get()) {
+            hp += target.getHealth();
+            stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp));
+            target.remove();
+        //          If poisoning config is enabled, poison
+            if (Config.MONSTERS_POISON.get()) {
+                player.addPotionEffect(new EffectInstance(Effects.POISON, Config.MONSTER_POISON_LENGTH.get(), Config.MONSTER_POISON_INTENSITY.get()-1));
+            }
+        }
         return true;
     }
 
