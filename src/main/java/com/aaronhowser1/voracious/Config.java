@@ -83,7 +83,7 @@ public class Config {
                 .defineInRange("digestionTime", 1, 1, Integer.MAX_VALUE);
         FEED_WHEN_UNSATURATED = COMMON_BUILDER.comment("\nSet to true to feed when saturation is low, \nset to false to feed when hunger is low")
                 .define("feed_when_unsaturated",false);
-        FEED_WHEN_UNDER = COMMON_BUILDER.comment("\nFeeds you when you are under this amount of either saturation or hunger, based on other config")
+        FEED_WHEN_UNDER = COMMON_BUILDER.comment("\nFeeds you when you are under this amount of either saturation or hunger, based on feed_when_unsaturated value")
                 .defineInRange("feed_when_under", 20, 1, 20);
 
         COMMON_BUILDER.pop();

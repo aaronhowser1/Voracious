@@ -22,7 +22,7 @@ updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://github.com/aaronhowser1/Voracious" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="examplemod.png" #optional
+logoFile="mouth.png" #optional
 # A text field displayed in the mod UI
 credits="LatvianModder for writing basically all the code" #optional
 # A text field displayed in the mod UI
