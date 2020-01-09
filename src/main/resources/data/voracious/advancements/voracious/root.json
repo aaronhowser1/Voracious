@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "voracious:mouth"
+    },
+    "title": {
+      "translate": "voracious.advancement.title"
+    },
+    "description": {
+      "translate": "voracious.advancement.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/nether.png"
+  },
+  "criteria": {
+    "crafting_table": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "voracious:mouth"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crafting_table"
+    ]
+  ]
+}
