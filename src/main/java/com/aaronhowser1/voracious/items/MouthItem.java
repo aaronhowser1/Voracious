@@ -1,6 +1,6 @@
 package com.aaronhowser1.voracious.items;
 
-import net.minecraft.client.util.ITooltipFlag;
+import com.aaronhowser1.voracious.Config;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,15 +10,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.FloatNBT;
 import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class MouthItem extends Item {
 
@@ -54,14 +46,9 @@ public class MouthItem extends Item {
             float hp = stack.getTag().getFloat("stored_hp");
             if(hp >= 1F && ((ServerPlayerEntity) entity).getFoodStats().getFoodLevel()<20) {
                 stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp - 1F));
-                ((ServerPlayerEntity) entity).getFoodStats().addStats(1, 1F);
+                ((ServerPlayerEntity) entity).getFoodStats().addStats(Config.FOOD_AMOUNT.get(), Config.SATURATION_AMOUNT.get());
             }
         }
     }
-
-    @OnlyIn(Dist.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-//        tooltip.add(new TranslationTextComponent("voracious.remaining", Math.round(stack.getTag().getFloat("stored_hp"))));
-    }
+//    TODO: Add tooltip
 }
