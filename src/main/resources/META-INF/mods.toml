@@ -47,6 +47,6 @@ Yum
 [[dependencies.voracious]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.1,0)"
+    versionRange="[1.15.1]"
     ordering="NONE"
     side="BOTH"
