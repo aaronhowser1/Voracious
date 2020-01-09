@@ -14,6 +14,7 @@ public class Config {
 
     public static final String CATEGORY_GENERAL = "general";
     public static final String SUBCATEGORY_FOOD_VALUES = "foodvalues";
+    public static final String SUBCATEGORY_DIGESTION_VALUES = "digestionvalues";
 
     private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 
@@ -22,11 +23,13 @@ public class Config {
 
     public static ForgeConfigSpec.IntValue FOOD_AMOUNT;
     public static ForgeConfigSpec.IntValue SATURATION_AMOUNT;
+    public static ForgeConfigSpec.IntValue WAIT_TIME;
 
     static {
 
         COMMON_BUILDER.comment("General settings").push(CATEGORY_GENERAL);
         setupFoodValuesConfig();
+        setupDigestionValues();
         COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
@@ -39,6 +42,16 @@ public class Config {
                 .defineInRange("foodAmount", 1, 0, Integer.MAX_VALUE);
         SATURATION_AMOUNT = COMMON_BUILDER.comment("Amount of saturation to refill")
                 .defineInRange("saturationAmount", 1, 0, Integer.MAX_VALUE);
+
+        COMMON_BUILDER.pop();
+    }
+
+    private static void setupDigestionValues() {
+        COMMON_BUILDER.comment("Digestion values").push(SUBCATEGORY_DIGESTION_VALUES);
+
+//      I hate that this is a thing that I made
+        WAIT_TIME = COMMON_BUILDER.comment("Amount of ticks to wait between giving food")
+                .defineInRange("digestionTime", 1, 1, Integer.MAX_VALUE);
 
         COMMON_BUILDER.pop();
     }

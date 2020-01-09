@@ -44,4 +44,6 @@ public class Voracious {
             event.getRegistry().register(new MouthItem().setRegistryName("mouth"));
         }
     }
+
+//    TODO: I Have a Mouth and I Am Screaming advancement
 }
