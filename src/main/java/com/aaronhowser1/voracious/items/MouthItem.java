@@ -15,6 +15,8 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+import static com.aaronhowser1.voracious.Voracious.EAT_MOB;
+
 public class MouthItem extends Item {
 
     public MouthItem() {
@@ -45,12 +47,14 @@ public class MouthItem extends Item {
         if (!(target instanceof IMob)) {
             hp += target.getHealth();
             stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp));
+            target.playSound(EAT_MOB, 1.0F, 0);
             target.remove();
         }
         //      If mob IS monster and eating monsters is ENABLED, run normally
         if (target instanceof IMob && Config.CAN_EAT_MONSTERS.get()) {
             hp += target.getHealth();
             stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp));
+            target.playSound(EAT_MOB, 1.0F, 0);
             target.remove();
         //          If poisoning config is enabled, poison
             if (Config.MONSTERS_POISON.get()) {

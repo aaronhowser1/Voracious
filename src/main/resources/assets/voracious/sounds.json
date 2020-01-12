@@ -1,0 +1,12 @@
+{
+  "voracious_eating": {
+    "category": "player",
+    "subtitle": "voracious.subtitle.eating",
+    "sounds": [
+      {"name":"voracious:pufferfish_1", "weight": 1},
+      {"name":"voracious:pufferfish_2", "weight": 1},
+      {"name":"voracious:gulp1", "weight": 98, "comment": "taken from https://freesound.org/people/GagaMan/sounds/88510/#comments"},
+      {"name":"voracious:gulp2", "weight": 98, "comment": "taken from https://freesound.org/people/GagaMan/sounds/88510/#comments"}
+    ]
+  }
+}

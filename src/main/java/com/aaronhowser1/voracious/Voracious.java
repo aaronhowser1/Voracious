@@ -2,6 +2,9 @@ package com.aaronhowser1.voracious;
 
 import com.aaronhowser1.voracious.items.MouthItem;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,6 +16,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Resource;
 
 @Mod("voracious")
 public class Voracious {
@@ -45,5 +50,9 @@ public class Voracious {
         }
     }
 
-//    TODO: I Have a Mouth and I Am Screaming advancement
+    private static net.minecraft.util.SoundEvent register(String key) {
+        return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
+    }
+    public static final SoundEvent EAT_MOB = register("voracious_eating");
+
 }
