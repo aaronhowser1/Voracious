@@ -47,14 +47,14 @@ public class MouthItem extends Item {
         if (!(target instanceof IMob)) {
             hp += target.getHealth();
             stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp));
-            target.playSound(EAT_MOB, 1.0F, 0);
+            target.playSound(EAT_MOB, 1.0F, 1.0F);
             target.remove();
         }
         //      If mob IS monster and eating monsters is ENABLED, run normally
         if (target instanceof IMob && Config.CAN_EAT_MONSTERS.get()) {
             hp += target.getHealth();
             stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp));
-            target.playSound(EAT_MOB, 1.0F, 0);
+            target.playSound(EAT_MOB, 1.0F, 1.0F);
             target.remove();
         //          If poisoning config is enabled, poison
             if (Config.MONSTERS_POISON.get()) {
