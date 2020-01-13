@@ -53,6 +53,6 @@ public class Voracious {
     private static net.minecraft.util.SoundEvent register(String key) {
         return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
     }
-    public static final SoundEvent EAT_MOB = register("gulp");
+    public static final SoundEvent EAT_MOB = register("voracious:gulp");
 
 }
