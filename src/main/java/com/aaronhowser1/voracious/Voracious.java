@@ -17,8 +17,6 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.Resource;
-
 @Mod("voracious")
 public class Voracious {
     // Directly reference a log4j logger.
