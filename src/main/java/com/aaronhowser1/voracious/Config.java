@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.nio.file.Path;
 
 @Mod.EventBusSubscriber
+@SuppressWarnings("WeakerAccess")
 public class Config {
 
     public static final String CATEGORY_GENERAL = "general";
@@ -31,6 +32,7 @@ public class Config {
     public static ForgeConfigSpec.BooleanValue CAN_EAT_PLAYERS;
     public static ForgeConfigSpec.BooleanValue FEED_WHEN_UNSATURATED;
     public static ForgeConfigSpec.IntValue FEED_WHEN_UNDER;
+    public static ForgeConfigSpec.IntValue COOLDOWN;
 
     static {
 
@@ -50,7 +52,8 @@ public class Config {
                 .defineInRange("foodAmount", 1, 0, Integer.MAX_VALUE);
         SATURATION_AMOUNT = COMMON_BUILDER.comment("\nAmount of saturation to refill")
                 .defineInRange("saturationAmount", 1, 0, Integer.MAX_VALUE);
-
+        COOLDOWN = COMMON_BUILDER.comment("\nAmount of ticks for cooldown")
+                .defineInRange("cooldown", 20, 0, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
     }
 

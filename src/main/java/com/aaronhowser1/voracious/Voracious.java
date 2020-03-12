@@ -71,5 +71,4 @@ public class Voracious {
     @ObjectHolder("voracious:gulp")
     public static SoundEvent EAT_MOB;
 
-
 }

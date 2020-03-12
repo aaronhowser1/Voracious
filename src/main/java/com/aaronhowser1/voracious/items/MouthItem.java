@@ -29,6 +29,7 @@ public class MouthItem extends Item {
     //Most of the code below here written by LatvianModder, who refused to teach me how to make this and just made it himself
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity player, LivingEntity target, Hand hand) {
+        player.getCooldownTracker().setCooldown(this, Config.COOLDOWN.get());
         if (player.world.isRemote()) {
             return false;
         }
