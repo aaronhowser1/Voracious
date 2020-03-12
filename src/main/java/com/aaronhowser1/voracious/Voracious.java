@@ -3,8 +3,6 @@ package com.aaronhowser1.voracious;
 import com.aaronhowser1.voracious.blocks.KidneyStoneBlock;
 import com.aaronhowser1.voracious.items.MouthItem;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
