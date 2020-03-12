@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,6 +18,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ObjectHolder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -62,12 +62,14 @@ public class Voracious {
                     .group(ItemGroup.BUILDING_BLOCKS))
                     .setRegistryName("kidney_stone"));
         }
+        @SubscribeEvent
+        public static void onSoundsRegistry(final RegistryEvent.Register<SoundEvent> event) {
+            event.getRegistry().register(new SoundEvent(new ResourceLocation("voracious:gulp")).setRegistryName("gulp"));
+        }
     }
 
-    @SuppressWarnings("deprecation")
-    private static net.minecraft.util.SoundEvent register(String key) {
-        return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
-    }
-    public static final SoundEvent EAT_MOB = register("voracious:gulp");
+    @ObjectHolder("voracious:gulp")
+    public static SoundEvent EAT_MOB;
+
 
 }
