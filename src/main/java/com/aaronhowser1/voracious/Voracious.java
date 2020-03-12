@@ -64,6 +64,7 @@ public class Voracious {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static net.minecraft.util.SoundEvent register(String key) {
         return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
     }
