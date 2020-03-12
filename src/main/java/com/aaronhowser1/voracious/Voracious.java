@@ -1,8 +1,9 @@
 package com.aaronhowser1.voracious;
 
-import com.aaronhowser1.voracious.blocks.KidneyStoneBlock;
 import com.aaronhowser1.voracious.items.MouthItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -48,12 +49,18 @@ public class Voracious {
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(new KidneyStoneBlock());
+            event.getRegistry().register(new Block(Block.Properties
+                    .create(Material.EARTH)
+                    .sound(SoundType.STONE)
+                    .hardnessAndResistance(-1.0F,3600000.0F))
+                    .setRegistryName("kidney_stone"));
         }
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
             event.getRegistry().register(new MouthItem().setRegistryName("mouth"));
-            event.getRegistry().register(new BlockItem(ModBlocks.KIDNEYSTONEBLOCK, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("kidney_stone"));
+            event.getRegistry().register(new BlockItem(ModBlocks.KIDNEY_STONE, new Item.Properties()
+                    .group(ItemGroup.BUILDING_BLOCKS))
+                    .setRegistryName("kidney_stone"));
         }
     }
 
