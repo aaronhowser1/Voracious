@@ -8,5 +8,12 @@
       {"name":"voracious:gulp1", "weight": 18, "comment": "taken from https://freesound.org/people/GagaMan/sounds/88510/#comments"},
       {"name":"voracious:gulp2", "weight": 18, "comment": "taken from https://freesound.org/people/GagaMan/sounds/88510/#comments"}
     ]
+  },
+  "scream": {
+    "category": "player",
+    "subtitle": "voracious.subtitle.scream",
+    "sounds": [
+      {"name":"voracious:sheep", "comment": "taken from https://www.youtube.com/watch?v=SIaFtAKnqBU"}
+    ]
   }
 }

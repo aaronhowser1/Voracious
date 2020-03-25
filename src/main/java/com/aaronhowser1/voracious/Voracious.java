@@ -65,10 +65,13 @@ public class Voracious {
         @SubscribeEvent
         public static void onSoundsRegistry(final RegistryEvent.Register<SoundEvent> event) {
             event.getRegistry().register(new SoundEvent(new ResourceLocation("voracious:gulp")).setRegistryName("gulp"));
+            event.getRegistry().register(new SoundEvent(new ResourceLocation("voracious:scream")).setRegistryName("scream"));
         }
     }
 
     @ObjectHolder("voracious:gulp")
     public static SoundEvent EAT_MOB;
+    @ObjectHolder("voracious:scream")
+    public static SoundEvent SCREAM;
 
 }

@@ -12,11 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.FloatNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 import static com.aaronhowser1.voracious.Voracious.EAT_MOB;
+import static com.aaronhowser1.voracious.Voracious.SCREAM;
 
 public class MouthItem extends Item {
 
@@ -49,7 +51,10 @@ public class MouthItem extends Item {
         if (!(target instanceof IMob)) {
             hp += target.getHealth();
             stack.setTagInfo("stored_hp", FloatNBT.func_229689_a_(hp));
-            player.getEntityWorld().playSound(null, player.func_226277_ct_(), player.func_226278_cu_(), player.func_226281_cx_(), EAT_MOB, SoundCategory.PLAYERS, 1.0F, 1.0F);
+            player.getEntityWorld().playSound(null, player.func_226277_ct_(), //posX
+                    player.func_226278_cu_(), //posY
+                    player.func_226281_cx_(), //posZ
+                    EAT_MOB, SoundCategory.PLAYERS, 1.0F, 1.0F);
             target.remove();
         }
         //      If mob IS monster and eating monsters is ENABLED, run normally
@@ -64,6 +69,19 @@ public class MouthItem extends Item {
             }
         }
         return true;
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity player, Hand handIn) {
+        player.getCooldownTracker().setCooldown(this, 34); //34 ticks is roughly how long the scream sound takes
+        ItemStack itemstack = player.getHeldItem(handIn);
+        worldIn.playSound((PlayerEntity)null,
+                player.func_226277_ct_(), //poxX
+                player.func_226278_cu_(), //posY
+                player.func_226281_cx_(), //posZ
+                SCREAM, SoundCategory.PLAYERS, 1.0F, 1.0F);
+
+        return ActionResult.func_226248_a_(itemstack); //func_226248_a_=success
     }
 
     @Override
@@ -82,5 +100,8 @@ public class MouthItem extends Item {
             }
         }
     }
+
+
+
 //    TODO: Add tooltip
 }
