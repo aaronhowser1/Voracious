@@ -33,10 +33,15 @@ public class Config {
     public static ForgeConfigSpec.BooleanValue FEED_WHEN_UNSATURATED;
     public static ForgeConfigSpec.IntValue FEED_WHEN_UNDER;
     public static ForgeConfigSpec.IntValue COOLDOWN;
+    public static ForgeConfigSpec.BooleanValue SCREAM;
 
     static {
 
         COMMON_BUILDER.comment("General settings").push(CATEGORY_GENERAL);
+        COOLDOWN = COMMON_BUILDER.comment("\nAmount of ticks for cooldown")
+                .defineInRange("cooldown", 20, 0, Integer.MAX_VALUE);
+        SCREAM = COMMON_BUILDER.comment("\nSCREAM?!")
+                .define("enable_screaming", true);
         setupFeedingConfigs();
         setupDigestionConfigs();
         setupEdibleConfigs();
@@ -52,8 +57,6 @@ public class Config {
                 .defineInRange("foodAmount", 1, 0, Integer.MAX_VALUE);
         SATURATION_AMOUNT = COMMON_BUILDER.comment("\nAmount of saturation to refill")
                 .defineInRange("saturationAmount", 1, 0, Integer.MAX_VALUE);
-        COOLDOWN = COMMON_BUILDER.comment("\nAmount of ticks for cooldown")
-                .defineInRange("cooldown", 20, 0, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
     }
 

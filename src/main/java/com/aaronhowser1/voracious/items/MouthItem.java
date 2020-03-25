@@ -73,15 +73,19 @@ public class MouthItem extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity player, Hand handIn) {
-        player.getCooldownTracker().setCooldown(this, 34); //34 ticks is roughly how long the scream sound takes
         ItemStack itemstack = player.getHeldItem(handIn);
-        worldIn.playSound((PlayerEntity)null,
-                player.func_226277_ct_(), //poxX
-                player.func_226278_cu_(), //posY
-                player.func_226281_cx_(), //posZ
-                SCREAM, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        if(Config.SCREAM.get()) {
+            player.getCooldownTracker().setCooldown(this, 34); //34 ticks is roughly how long the scream sound takes
+            worldIn.playSound((PlayerEntity) null,
+                    player.func_226277_ct_(), //poxX
+                    player.func_226278_cu_(), //posY
+                    player.func_226281_cx_(), //posZ
+                    SCREAM, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
-        return ActionResult.func_226248_a_(itemstack); //func_226248_a_=success
+            return ActionResult.func_226248_a_(itemstack); //func_226248_a_=success
+        } else {
+            return ActionResult.func_226251_d_(itemstack); //func_226251_d_=fail
+        }
     }
 
     @Override
