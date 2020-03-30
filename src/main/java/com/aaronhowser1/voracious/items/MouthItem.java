@@ -70,6 +70,9 @@ public class MouthItem extends Item {
             if (Config.MONSTERS_POISON.get()) {
                 player.addPotionEffect(new EffectInstance(Effects.POISON, Config.MONSTER_POISON_LENGTH.get(), Config.MONSTER_POISON_INTENSITY.get()-1));
             }
+            player.getHeldItem(hand).damageItem(1, player, playerEntity -> {
+                playerEntity.sendBreakAnimation(hand);
+            });
         }
 
         return true;
