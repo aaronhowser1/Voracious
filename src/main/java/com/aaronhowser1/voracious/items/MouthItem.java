@@ -140,13 +140,16 @@ public class MouthItem extends Item {
 
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        CompoundNBT compoundnbt = stack.getTag();
         if (stack.hasTag() && ModConfig.USE_TOOLTIP.get()) {
-            CompoundNBT compoundnbt = stack.getTag();
-            Integer i = Math.round(compoundnbt.getFloat("stored_hp"));
+            Integer amount_left = Math.round(compoundnbt.getFloat("stored_hp"));
 
-            tooltip.add((new TranslationTextComponent("voracious.tooltip.health", i)).applyTextStyle(TextFormatting.YELLOW));
+            tooltip.add((new TranslationTextComponent("voracious.tooltip.health", amount_left)).applyTextStyle(TextFormatting.YELLOW));
         }
-
+        Integer damage_taken = compoundnbt.getInt("Damage");
+        if (ModConfig.ENABLE_DURABILITY.get() && damage_taken > (ModConfig.MAX_DAMAGE.get()/2)) {
+            tooltip.add((new TranslationTextComponent("voracious.tooltip.repair")));
+        }
     }
 
 //    TODO: Make floss repair it more
