@@ -16,6 +16,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 import static com.aaronhowser1.voracious.Voracious.EAT_MOB;
 import static com.aaronhowser1.voracious.Voracious.SCREAM;
 
@@ -24,7 +26,7 @@ public class MouthItem extends Item {
     public MouthItem() {
         super(new Item.Properties()
                 .maxStackSize(1)
-                .maxDamage(100)
+                .maxDamage(Config.MAX_DAMAGE.get())
                 .group(ItemGroup.FOOD));
     }
 
@@ -56,9 +58,11 @@ public class MouthItem extends Item {
                     player.func_226281_cx_(), //posZ
                     EAT_MOB, SoundCategory.PLAYERS, 1.0F, 1.0F);
             target.remove();
-            player.getHeldItem(hand).damageItem(1, player, playerEntity -> {
-                playerEntity.sendBreakAnimation(hand);
-            });
+            if(Config.ENABLE_DURABILITY.get()) {
+                player.getHeldItem(hand).damageItem(1, player, playerEntity -> {
+                    playerEntity.sendBreakAnimation(hand);
+                });
+            }
         }
         //      If mob IS monster and eating monsters is ENABLED, run normally
         if (target instanceof IMob && Config.CAN_EAT_MONSTERS.get()) {
@@ -70,9 +74,11 @@ public class MouthItem extends Item {
             if (Config.MONSTERS_POISON.get()) {
                 player.addPotionEffect(new EffectInstance(Effects.POISON, Config.MONSTER_POISON_LENGTH.get(), Config.MONSTER_POISON_INTENSITY.get()-1));
             }
-            player.getHeldItem(hand).damageItem(1, player, playerEntity -> {
-                playerEntity.sendBreakAnimation(hand);
-            });
+            if(Config.ENABLE_DURABILITY.get()) {
+                player.getHeldItem(hand).damageItem(1, player, playerEntity -> {
+                    playerEntity.sendBreakAnimation(hand);
+                });
+            }
         }
 
         return true;
@@ -88,11 +94,19 @@ public class MouthItem extends Item {
                     player.func_226278_cu_(), //posY
                     player.func_226281_cx_(), //posZ
                     SCREAM, SoundCategory.PLAYERS, 1.0F, 1.0F);
-
+//          Scream repairing
+            if(Config.SCREAM_REPAIRS.get()) {
+                Random r = new Random();
+                float chance = r.nextInt();
+                if(chance <= Config.SCREAM_REPAIR_CHANCE.get()) {
+                    player.getHeldItem(handIn).damageItem(-5, player, null);
+                }
+            }
             return ActionResult.func_226248_a_(itemstack); //func_226248_a_=success
         } else {
             return ActionResult.func_226251_d_(itemstack); //func_226251_d_=fail
         }
+
     }
 
     @Override
