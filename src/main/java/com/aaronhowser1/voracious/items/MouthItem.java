@@ -30,7 +30,6 @@ import java.util.Random;
 import static com.aaronhowser1.voracious.Voracious.EAT_MOB;
 import static com.aaronhowser1.voracious.Voracious.SCREAM;
 
-@SuppressWarnings("all")
 public class MouthItem extends Item {
 
     public MouthItem() {
