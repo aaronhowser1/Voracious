@@ -1,7 +1,6 @@
 package com.aaronhowser1.voracious.items;
 
 import com.aaronhowser1.voracious.Config;
-//import com.aaronhowser1.voracious.ModItems;
 import com.aaronhowser1.voracious.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -57,6 +56,9 @@ public class MouthItem extends Item {
                     player.func_226281_cx_(), //posZ
                     EAT_MOB, SoundCategory.PLAYERS, 1.0F, 1.0F);
             target.remove();
+            player.getHeldItem(hand).damageItem(1, player, playerEntity -> {
+                playerEntity.sendBreakAnimation(hand);
+            });
         }
         //      If mob IS monster and eating monsters is ENABLED, run normally
         if (target instanceof IMob && Config.CAN_EAT_MONSTERS.get()) {
@@ -112,4 +114,5 @@ public class MouthItem extends Item {
     }
 
 //    TODO: Add tooltip
+//    TODO: Make floss repair it more
 }
