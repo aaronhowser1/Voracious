@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 @Mod.EventBusSubscriber
 @SuppressWarnings("WeakerAccess")
-public class Config {
+public class ModConfig {
 
     public static final String CATEGORY_GENERAL = "general";
     public static final String SUBCATEGORY_DURABILITY = "durability";
@@ -23,6 +23,7 @@ public class Config {
     public static ForgeConfigSpec COMMON_CONFIG;
 
     public static ForgeConfigSpec.IntValue COOLDOWN;
+    public static ForgeConfigSpec.BooleanValue USE_TOOLTIP;
 
     public static ForgeConfigSpec.BooleanValue ENABLE_DURABILITY;
     public static ForgeConfigSpec.IntValue MAX_DAMAGE;
@@ -51,6 +52,8 @@ public class Config {
         COMMON_BUILDER.comment("General settings").push(CATEGORY_GENERAL);
         COOLDOWN = COMMON_BUILDER.comment("\nAmount of ticks for cooldown")
                 .defineInRange("cooldown", 20, 0, Integer.MAX_VALUE);
+        USE_TOOLTIP = COMMON_BUILDER.comment("\nEnable tooltip")
+                .define("enable_tooltip", true);
 
         setupDurabilityConfigs();
         setupFeedingConfigs();
