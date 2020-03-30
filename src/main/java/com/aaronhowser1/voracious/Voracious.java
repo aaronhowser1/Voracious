@@ -1,5 +1,6 @@
 package com.aaronhowser1.voracious;
 
+//import com.aaronhowser1.voracious.items.FlossItem;
 import com.aaronhowser1.voracious.items.MouthItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -58,6 +59,7 @@ public class Voracious {
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
             event.getRegistry().register(new MouthItem().setRegistryName("mouth"));
+            event.getRegistry().register(new Item(new Item.Properties().group(ItemGroup.MISC)).setRegistryName("floss"));
             event.getRegistry().register(new BlockItem(ModBlocks.KIDNEY_STONE, new Item.Properties()
                     .group(ItemGroup.BUILDING_BLOCKS))
                     .setRegistryName("kidney_stone"));

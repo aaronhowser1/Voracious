@@ -1,14 +1,14 @@
 package com.aaronhowser1.voracious.items;
 
 import com.aaronhowser1.voracious.Config;
+//import com.aaronhowser1.voracious.ModItems;
+import com.aaronhowser1.voracious.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.FloatNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -25,6 +25,7 @@ public class MouthItem extends Item {
     public MouthItem() {
         super(new Item.Properties()
                 .maxStackSize(1)
+                .maxDamage(100)
                 .group(ItemGroup.FOOD));
     }
 
@@ -68,6 +69,7 @@ public class MouthItem extends Item {
                 player.addPotionEffect(new EffectInstance(Effects.POISON, Config.MONSTER_POISON_LENGTH.get(), Config.MONSTER_POISON_INTENSITY.get()-1));
             }
         }
+
         return true;
     }
 
@@ -105,7 +107,9 @@ public class MouthItem extends Item {
         }
     }
 
-
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return repair.getItem() == ModItems.FLOSS;
+    }
 
 //    TODO: Add tooltip
 }
